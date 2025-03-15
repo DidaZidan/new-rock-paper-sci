@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Rock Paper Scissors game</h1>
+    <button class="move-icon" onclick="
+    computerPlay();
+    playermove='rock'
+    if(compmove===playermove){
+         result = 'ties'
+         scorepick();
+        
+    }
+    else if (compmove=== 'paper'){
+         result = 'lose'
+         scorepick();
+        
+    }    
+    else if (compmove=== 'scissors'){
+        result = 'win'
+        scorepick();
+        
+    }  
+    scoredisplay();
+    let Movepick = document.querySelector('.js-pick');
+    Movepick.innerHTML=`you picked <img src='${playermove}-emoji.png'>  <img src='${compmove}-emoji.png' > computer picked` 
+    "><img src="rock-emoji.png"></button>
+    <button class="move-icon" onclick="
+    computerPlay();
+    playermove='paper'
+    if(compmove===playermove){
+         result = 'ties'
+         scorepick();
+        
+    }
+    else if (compmove=== 'scissors'){
+        result = 'lose'
+        scorepick();
+        
+    }    
+    else if (compmove=== 'rock'){
+        result = 'win'
+        scorepick();
+        
+    }
+    scoredisplay();
+    let Movepick = document.querySelector('.js-pick');
+    Movepick.innerHTML=`you picked <img src='${playermove}-emoji.png'>  <img src='${compmove}-emoji.png' > computer picked`
+    "><img src="paper-emoji.png" alt=""></button>
+    <button class="move-icon" onclick="computerPlay();
+        playermove='scissors'
+    if(compmove===playermove){
+         result = 'ties'
+         scorepick();
+        
+    }
+    else if (compmove=== 'rock'){
+        result = 'lose'
+        scorepick();
+        
+    }    
+    else if (compmove=== 'paper'){
+        result = 'win'
+        scorepick();
+        
+    }
+    scoredisplay();
+    let Movepick = document.querySelector('.js-pick');
+    Movepick.innerHTML=`you picked <img src='${playermove}-emoji.png'>  <img src='${compmove}-emoji.png' > computer picked`
+    "><img src="scissors-emoji.png" alt=""></button>
+    <p class="js-result"></p>
+    <p class="js-score"></p>
+    <p class="js-pick moves movess"></p>
+    <button class="reset" onclick="
+    score.lose=0;
+    score.ties=0;
+    score.win=0;
+    let pgResult = document.querySelector('.js-score');
+    pgResult.innerHTML=` win:${score.win},lose:${score.lose},ties:${score.ties}`;
+    ">reset score</button>
+
+    <script>
+        let score =JSON.parse(localStorage.getItem('score'))||{win:0,lose:0,ties:0}
+        let playermove='';
+        let compmove='';
+        let result = '';
+        function computerPlay(){
+            let guess= Math.random();
+            if(guess>=0 && guess <= 1/3){
+                compmove = 'paper'
+                }
+                else if(guess>1/3 && guess <= 2/3) {
+                    compmove='rock'
+                }
+                else if(guess>2/3 && guess <= 1) {
+                    compmove='scissors'
+                }        
+            };
+        function scorepick(){
+        if(result === 'win'){
+                score.win+=1;
+            }else if (result==='lose'){
+                score.lose+=1
+            }else if (result==='ties'){
+                score.ties+=1
+            }
+            localStorage.setItem('score',JSON.stringify(score))
+            let pgResult = document.querySelector('.js-score');
+            pgResult.innerHTML=` win:${score.win},lose:${score.lose},ties:${score.ties}`
+        }
+        function scoredisplay(){
+            let score = document.querySelector('.js-result')
+            score.innerHTML=`you ${result}`
+            if(result==='ties'){
+                score.innerHTML=`${result}`
+            }
+        }
+    </script>
+</body>
+</html>
